@@ -96,6 +96,7 @@ img {
   row-gap: 28px;
   padding: 4px 20px;
   margin: 0;
+  cursor: pointer;
 }
 
 .info li {
