@@ -1,13 +1,20 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
+export const refs = {
+  searchForm: document.querySelector('.form'),
+  searchBtn: document.querySelector('button[type="submit"]'),
+  galleryList: document.querySelector('.gallery'),
+  loader: document.querySelector('.loader'),
+};
+
 export const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
 
 export function createGallery(images) {
-  return images
+  const markup = images
     .map(img => {
       return `<li class="gallery-item">
                     <a class="gallery-link" href="${img.largeImageURL}">
@@ -26,19 +33,19 @@ export function createGallery(images) {
                 </li>`;
     })
     .join('');
+
+  refs.galleryList.innerHTML = markup;
+  lightbox.refresh();
 }
 
 export function clearGallery() {
-  const galleryList = document.querySelector('.gallery');
-  galleryList.innerHTML = '';
+  refs.galleryList.innerHTML = '';
 }
 
 export function showLoader() {
-  const loader = document.querySelector('.loader');
-  loader.classList.add('is-visible');
+  refs.loader.classList.add('is-visible');
 }
 
 export function hideLoader() {
-  const loader = document.querySelector('.loader');
-  loader.classList.remove('is-visible');
+  refs.loader.classList.remove('is-visible');
 }
